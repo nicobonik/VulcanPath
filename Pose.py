@@ -16,3 +16,8 @@ class Pose:
 
     def get_heading(self):
         return self.heading
+
+    def set_pose(self, pose):
+        self.x = pose.x
+        self.y = pose.y
+        self.heading = pose.heading
