@@ -17,7 +17,7 @@ def main():
     global robot_pose
 
     # define trajectory with an interpolated spline and initialize a follower
-    interpolated_spline = parametric_spline_interpolate([0.0, 15.0, 20.0], [0.0, 10.0, 5.0])
+    interpolated_spline = parametric_spline_interpolate([0.0, 30.0, 20.0, 35.0, 0.0], [0.0, 20.0, 5.0, -10.0, 0.0])
     traj = SplineTrajectory(interpolated_spline)
     trajectory_follower = TrajectoryFollower(traj)
 
