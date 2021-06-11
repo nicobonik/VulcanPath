@@ -14,7 +14,7 @@ from PID import PID
 from Pose import Pose
 from tvc import SplineTrajectory, TrajectoryFollower
 
-ser = serial.Serial('/dev/cu.usbmodem14101', 9600, timeout=0.1)
+ser = serial.Serial('/dev/cu.usbmodem14101', 9600, timeout=0.3)
 
 x = 0.0
 y = 0.0

@@ -1,5 +1,6 @@
 from scipy.interpolate import CubicSpline, PPoly
 import numpy as np
+from typing import List
 
 
 class ParametricSpline(object):
@@ -18,7 +19,7 @@ class ParametricSpline(object):
         return self.spline_y.x
 
 
-def parametric_spline_interpolate(x: list[float], y: list[float]) -> ParametricSpline:
+def parametric_spline_interpolate(x: List[float], y: List[float]) -> ParametricSpline:
     t = np.linspace(0, len(x) - 1, len(x))
     interpolated_spline_x = CubicSpline(t, x)
     interpolated_spline_y = CubicSpline(t, y)
