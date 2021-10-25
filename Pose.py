@@ -21,3 +21,5 @@ class Pose:
         self.x = pose.x
         self.y = pose.y
         self.heading = pose.heading
+
+        
