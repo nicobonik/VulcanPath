@@ -1,6 +1,6 @@
 # VulcanPath
 
-Welcome to VulcanPath! This is a small library that I created in python that does some simple path following, spline interpolation, and trajectory creation. It is written with pygame and has a full simulator built in for the trajectory following. Currently, the spline trajectory alg is too slow to run on the robot using pyserial and arduinos.
+Welcome to VulcanPath! This is a small library that I created in python that does some simple path following, spline interpolation, and trajectory creation. It is written with pygame and has a full simulator built in for the trajectory following. Currently, the spline trajectory alg is too slow to run on the robot using pyserial and arduinos. While this library is much more situational and specific to my system, it still has a lot of interesting math that was fun to implement
 
 // gif of pure pursuit alg working on trakr bot
 
