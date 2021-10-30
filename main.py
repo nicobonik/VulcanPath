@@ -14,7 +14,7 @@ from PID import PID
 from Pose import Pose
 from tvc import SplineTrajectory, TrajectoryFollower
 
-ser = serial.Serial('/dev/cu.usbmodem14101', 9600, timeout=0.3)
+ser = serial.Serial('/dev/cu.usbmodem14101', 9600, timeout=0.1)
 
 x = 0.0
 y = 0.0
@@ -53,7 +53,7 @@ def robot():
     global target_pose
 
     point_list = [PathPoint(0, 0, 1, 10), PathPoint(15, 10, 1, 10), PathPoint(25, -10, 1, 10), PathPoint(50, 5, 1, 10)]
-    interpolated_spline = parametric_spline_interpolate([0.0, 30.0, 20.0, 35.0, 0.0], [0.0, 20.0, 5.0, -10.0, 0.0])
+    interpolated_spline = parametric_spline_interpolate([0.0, 15.0, 20.0], [0.0, 10.0, 5.0])
     traj = SplineTrajectory(interpolated_spline)
     trajectory_follower = TrajectoryFollower(traj)
 
@@ -62,6 +62,7 @@ def robot():
     velocity = 0.00
 
     while running:
+        time_start = time.time_ns()
         powers = ""
         powerLeft = 0
         powerRight = 0
@@ -93,6 +94,7 @@ def robot():
             # #     follow_point.speed = 0
             # powerList = moveToPoint(follow_point.x, follow_point.y, 30 * follow_point.speed, x, y, theta)
             if trajectory_follower.running:
+
                 trajectory_follower.run_async()
                 target_pose.set_pose(trajectory_follower.follower_pose)
                 powerList = drive_with_velocity(DriveConstants.max_velocity,
@@ -153,6 +155,7 @@ def robot():
 
         lastLeftPosition = leftPosition
         lastRightPosition = rightPosition
+        print((time.time_ns() - time_start) / 1000000000)
 
 
 def main():
@@ -166,7 +169,7 @@ def main():
     global target_pose
 
     # bot = pygame.rect.Rect(200, 200, 50, 50)
-    interpolated_spline = parametric_spline_interpolate([0.0, 30.0, 20.0, 35.0, 0.0], [0.0, 20.0, 5.0, -10.0, 0.0])
+    interpolated_spline = parametric_spline_interpolate([0.0, 15.0, 20.0], [0.0, 10.0, 5.0])
     points = np.linspace(0, len(interpolated_spline.get_knots()) - 1, 100)
     xy_points = []
     for point in points:
@@ -224,7 +227,7 @@ def drive_with_velocity(target_velocity, target_heading, velocity, heading):
     heading_output = turn_pid.update(target_heading, heading)
     left_power = velocity_output + heading_output
     right_power = velocity_output - heading_output
-    print(velo_pid.lastError)
+    # print(velo_pid.lastError)
     return left_power, right_power
 
 
